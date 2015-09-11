@@ -56,16 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterSplitter.cs" />
-    <Compile Include="CSharpFilter.cs" />
-    <Compile Include="DiffLogic.cs" />
-    <Compile Include="Filter.cs" />
-    <Compile Include="LineSplitter.cs" />
-    <Compile Include="NothingFilter.cs" />
-    <Compile Include="SimpleDiffLogic.cs" />
+    <Compile Include="Splitter\CharacterSplitter.cs" />
+    <Compile Include="Filter\CSharpFilter.cs" />
+    <Compile Include="Logic\DiffLogic.cs" />
+    <Compile Include="Filter\Filter.cs" />
+    <Compile Include="Splitter\LineSplitter.cs" />
+    <Compile Include="Filter\NothingFilter.cs" />
+    <Compile Include="Logic\SimpleDiffLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Splitter.cs" />
+    <Compile Include="Splitter\Splitter.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>

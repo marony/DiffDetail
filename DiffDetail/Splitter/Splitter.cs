@@ -8,10 +8,15 @@ namespace DiffDetail
 {
 	public enum SplitType
 	{
+        // 文字単位
 		Character,
+        // 行単位
 		Line
 	}
 
+    /// <summary>
+    /// 比較する単位で分割する
+    /// </summary>
 	public abstract class Splitter
 	{
 		public static Splitter CreateSplitter(SplitType type, Filter filter)

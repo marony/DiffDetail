@@ -44,7 +44,9 @@ namespace DiffDetail
 					var lhsContent = (lhsFileName != null ? File.ReadAllText(lhsFileName) : "");
 					var rhsContent = (rhsFileName != null ? File.ReadAllText(rhsFileName) : "");
 
+					// 行ごとの比較結果のリスト
 					var r = diffLogic.Diff(lhsContent, rhsContent);
+					// 異なる行から同じ行になるまでかループが終わるまでを出力
 					var diff = new List<DiffResult>();
 					foreach (var l in r)
 					{

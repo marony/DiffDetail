@@ -12,6 +12,7 @@ namespace DiffDetail
 	/// </summary>
 	public enum DiffLogicType : byte
 	{
+        // 単純なエディットグラフ
 		Simple
 	}
 
@@ -20,8 +21,11 @@ namespace DiffDetail
 	/// </summary>
 	public enum Difference : byte
 	{
+        // 比較結果が同じ
 		Same,
+        // 追加された
 		Add,
+        // 削除された
 		Remove
 	}
 

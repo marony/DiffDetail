@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DiffDetail
 {
+    /// <summary>
+    /// 雑多なユーティリティ
+    /// </summary>
 	public static class Util
 	{
 		/// <summary>
@@ -68,6 +71,11 @@ namespace DiffDetail
 			}
 			return fileMap;
 		}
+        /// <summary>
+        /// 比較結果をコンソールに出力
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="diff"></param>
 		public static void Output(string key, List<DiffResult> diff)
 		{
 			var add = 0;
