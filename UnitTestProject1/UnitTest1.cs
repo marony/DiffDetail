@@ -214,5 +214,14 @@ namespace UnitTestProject1
 			t = t.Trim();
 			Assert.AreEqual(string.Empty, t);
 		}
-	}
+
+	    [TestMethod]
+	    public void SplitTest()
+	    {
+	        var s = "*.*";
+            Assert.AreEqual(s.Split(',').Length, 1);
+	        s = "*.cs,*.xml";
+            Assert.AreEqual(s.Split(',').Length, 2);
+        }
+    }
 }

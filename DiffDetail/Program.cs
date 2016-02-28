@@ -13,22 +13,22 @@ namespace DiffDetail
 		{
 			if (args.Length < 2)
 			{
-				Console.WriteLine("USAGE: DiffDetail SrcDir DestDir [Pattern]");
+				Console.WriteLine("USAGE: DiffDetail SrcDir DestDir [Pattern(カンマ区切り)]");
 				return;
 			}
 
 			// オプションの処理
 			var lhsPath = Util.RemoveEndSeparator(args[0]);
 			var rhsPath = Util.RemoveEndSeparator(args[1]);
-			var pattern = "*.*";
+			var patterns = new string[] { "*.*" };
 			if (args.Length >= 3)
-				pattern = args[2];
+				patterns = args[2].Split(',');
 
-			Console.WriteLine("{0},{1},{2}", lhsPath, rhsPath, pattern);
+			Console.WriteLine("{0},{1},{2}", lhsPath, rhsPath, patterns.ToPrettyString());
 
 			// 元と先のディレクトリからファイルを検索
-			var lhsFiles = Util.GetFiles(lhsPath, pattern);
-			var rhsFiles = Util.GetFiles(rhsPath, pattern);
+			var lhsFiles = Util.GetFiles(lhsPath, patterns);
+			var rhsFiles = Util.GetFiles(rhsPath, patterns);
 
 			var fileMap = Util.MergeFiles(lhsPath, rhsPath, lhsFiles, rhsFiles);
 			// 全てのファイルを比較してCSVファイルを出力

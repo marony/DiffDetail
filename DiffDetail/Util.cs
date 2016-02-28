@@ -7,6 +7,22 @@ using System.Threading.Tasks;
 
 namespace DiffDetail
 {
+    static class ArrayExtention
+    {
+        public static string ToPrettyString<T>(this T[] array)
+        {
+            var str = new StringBuilder();
+            str.Append("{");
+            foreach (var c in array)
+            {
+                str.Append(c.ToString());
+                str.Append(",");
+            }
+            str.Append("}");
+            return str.ToString();
+        }
+    }
+
     /// <summary>
     /// 雑多なユーティリティ
     /// </summary>
@@ -30,15 +46,25 @@ namespace DiffDetail
 		/// <param name="path"></param>
 		/// <param name="pattern"></param>
 		/// <returns></returns>
-		public static string[] GetFiles(string path, string pattern)
+		public static string[] GetFiles(string path, string[] patterns)
 		{
 			try
 			{
-				return Directory.GetFiles(path, pattern, SearchOption.AllDirectories);
+                var files = new SortedDictionary<string, string>();
+			    foreach (var pattern in patterns)
+			    {
+			        var files2 = Directory.GetFiles(path, pattern, SearchOption.AllDirectories);
+			        foreach (var file in files2)
+			        {
+			            if (!files.ContainsKey(file))
+			                files.Add(file, string.Empty);
+			        }
+			    }
+			    return files.Keys.ToArray();
 			}
 			catch (Exception ex)
 			{
-				Console.Error.WriteLine("ERROR:{0},{1},{2}", ex, path, pattern);
+				Console.Error.WriteLine("ERROR:{0},{1},{2}", ex, path, patterns.ToPrettyString());
 				return new string[0];
 			}
 		}
@@ -103,8 +129,14 @@ namespace DiffDetail
 					rstr.Append(m.Rhs);
 			}
 			// Excelが改行付きのCSVを読み込めるように'"'を'""'に変換
-			var lstr2 = lstr.ToString().Replace("\"", "\"\"");
-			var rstr2 = rstr.ToString().Replace("\"", "\"\"");
+            var lstr2 = lstr.ToString();
+            if (lstr2.Length > 1024)
+                lstr2 = lstr2.Substring(0, 1024);
+            var rstr2 = rstr.ToString();
+            if (rstr2.Length > 1024)
+                rstr2 = rstr2.Substring(0, 1024);
+            lstr2 = lstr2.Replace("\"", "\"\"");
+			rstr2 = rstr2.Replace("\"", "\"\"");
 			Console.WriteLine("\"{0}\",{1},{2},\"{3}\",\"{4}\"",
 				key, add, remove,
 				lstr2, rstr2);
